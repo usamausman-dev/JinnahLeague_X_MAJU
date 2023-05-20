@@ -1,9 +1,7 @@
 import { Schema, model, models } from 'mongoose'
 
 const userSchema = new Schema({
-    firstname: String,
-    lastname: String,
-    organization: String,
+    username: String,
     email: String,
     password: String
 })
@@ -11,22 +9,40 @@ const userSchema = new Schema({
 const Users = models.user || model('user', userSchema);
 export default Users
 
-const projectSchema = new Schema({
-    projectAdmin: String,
-    projectName: String,
-    members: Array
+const restaurant = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    address: {
+        street: String,
+        city: String,
+        state: String,
+        zipCode: String,
+    },
+    cuisine: {
+        type: String,
+        required: true,
+    },
+    reviews: [
+        {
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Users',
+            },
+            rating: Number,
+            comment: String,
+        },
+    ],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+
 })
 
-export const Project = models.project || model('project', projectSchema)
-
-const TaskSchema = new Schema({
-    projectID: String,
-    name: String,
-    nature: String,
-    startdate: Date,
-    enddate: Date,
-    projectStatus: String,
-    person: String
-});
-
-export const Task = models.task || model('task', TaskSchema)
+export const Restaurant = models.restaurant || model('restaurant', restaurantSchema)
