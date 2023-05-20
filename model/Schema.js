@@ -16,6 +16,10 @@ const restaurantSchema = new Schema({
     required: true,
     unique: true,
   },
+  numOfTable: {
+    type: Number,
+    required: true,
+  },
   admin: {
     type: String,
     required: true,
@@ -53,6 +57,46 @@ const restaurantSchema = new Schema({
 });
 
 export const Restaurant = models.restaurant || model('restaurant', restaurantSchema);
+
+
+
+
+const reservationSchema = new mongoose.Schema({
+  restaurantId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Restaurant',
+    required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true,
+  },
+  date: {
+    type: String,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
+  },
+  NumOfPeople: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+    required: "true",
+  },
+  specialRequests: {
+    type: String,
+  },
+});
+
+export const Reservation = mongoose.model('Reservation', reservationSchema);
+
+
+
 
 
 
