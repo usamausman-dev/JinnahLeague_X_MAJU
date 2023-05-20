@@ -96,6 +96,41 @@ const reservationSchema = new mongoose.Schema({
 export const Reservation = mongoose.model('Reservation', reservationSchema);
 
 
+const orderSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true,
+  },
+  restaurantId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Restaurant',
+    required: true,
+  },
+  items: [
+    {
+      name: String,
+      quantity: Number,
+      price: Number,
+    },
+  ],
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+export const Order = mongoose.model('Order', orderSchema);
+
+
+
 
 
 
