@@ -3,10 +3,14 @@ import { Inter } from 'next/font/google'
 import axios from 'axios'
 import { useSession, signOut } from 'next-auth/react'
 import Restaurants from '@/Components/Restaurants'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const { data: session, status } = useSession()
+
+  console.log(status)
   return (
     <>
 
@@ -18,8 +22,21 @@ export default function Home() {
           </div>
 
           <div className='flex justify-centers items-centers'>
+            {
+              status === 'authenticated' ?
+                (
+                  <button className='bg-red-600 px-6 py-3 rounded ml-2' onClick={() => signOut({ callbackUrl: '/login' })}>Logout</button>
+                )
+                :
+                (
+                  <>
+                    <Link className='bg-red-600 px-6 py-3 rounded-lg ml-2' href="/login">Login</Link>
+                    <Link className='bg-slate-100 text-red-600 font-bold border-2 border-red-600 px-6 py-3 rounded-lg ml-2' href="/login">Sign Up</Link>
+                  </>
+                )
+            }
 
-            <button className='bg-red-600 px-6 py-3 rounded-lg' onClick={() => signOut({ callbackUrl: '/login' })}>Logout</button>
+
           </div>
 
         </nav>

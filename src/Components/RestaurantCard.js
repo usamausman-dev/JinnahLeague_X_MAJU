@@ -1,14 +1,16 @@
 import React from 'react'
 
-function RestaurantCard() {
+function RestaurantCard({ restaurantData }) {
+    console.log(restaurantData)
     return (
-        <div className='shadow-lg rounded-lg flex-col flex justify-between border-black-600/20 border-2' onClick={() => window.location = "/Restaurants/1234"}>
+        <div className='shadow-lg rounded-lg flex-col flex justify-between border-black-600/20 border-2' onClick={() => window.location = `/Restaurants/${restaurantData._id}`}>
             <div>
-                <img className='rounded' src="https://img.freepik.com/premium-vector/pattern-geometric-line-circle-abstract-seamless-blue-line_60284-53.jpg?w=2000" alt="cardImg" srcSet="" />
+                <img className='rounded' src={restaurantData.photo} alt="cardImg" srcSet="" />
             </div>
             <div className='flex flex-col justify-around p-5 text-bold'>
-                <div>Name</div>
-                <div className=''><span className='text-red-500 font-medium'>Gulistan Colony Lyari Khi</span></div>
+                <div>{restaurantData.name}</div>
+                <p>{restaurantData.description}</p>
+                <div className=''><span className='text-red-500 font-medium'>{restaurantData.address}</span></div>
             </div>
 
         </div>

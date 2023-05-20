@@ -24,7 +24,7 @@ function Login() {
             redirect: false,
             email: values.email,
             password: values.password,
-            callbackUrl: '/dashboard'
+            callbackUrl: '/'
         })
 
         if (status.ok) router.push(status.url)

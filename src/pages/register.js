@@ -33,22 +33,22 @@ const Register = () => {
         console.log(payload)
 
 
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        // }
+        const headers = {
+            'Content-Type': 'application/json',
+        }
 
-        // axios.post('/api/auth/signup', payload, {
-        //     headers: headers
-        // })
-        //     .then(function (response) {
-        //         if (response.status === 201) {
-        //             alert("Register Successful")
-        //             router.push('/')
-        //         }
-        //     })
-        //     .catch(function (error) {
-        //         alert(error.response);
-        //     });
+        axios.post('/api/auth/signup', payload, {
+            headers: headers
+        })
+            .then(function (response) {
+                if (response.status === 201) {
+                    alert("Register Successful")
+                    router.push('/')
+                }
+            })
+            .catch(function (error) {
+                alert(error.response);
+            });
 
     }
     return (
