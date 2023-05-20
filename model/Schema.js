@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose'
+import mongoose, { Schema, model, models } from 'mongoose'
 
 const userSchema = new Schema({
     username: String,
@@ -9,7 +9,7 @@ const userSchema = new Schema({
 const Users = models.user || model('user', userSchema);
 export default Users
 
-const restaurant = new Schema({
+const restaurantSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -19,30 +19,19 @@ const restaurant = new Schema({
         required: true,
     },
     address: {
-        street: String,
-        city: String,
-        state: String,
-        zipCode: String,
+        type: String,
+        required: true,
     },
     cuisine: {
         type: String,
         required: true,
     },
-    reviews: [
-        {
-            user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Users',
-            },
-            rating: Number,
-            comment: String,
-        },
-    ],
     createdAt: {
         type: Date,
         default: Date.now,
     },
+});
 
-})
+export const Restaurant = models.restaurant || model('restaurant', restaurantSchema);
 
-export const Restaurant = models.restaurant || model('restaurant', restaurantSchema)
+
