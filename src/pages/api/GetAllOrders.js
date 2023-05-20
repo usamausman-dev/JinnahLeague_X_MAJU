@@ -1,5 +1,4 @@
-import connectMongo from "../../../database/conn";
-import { Order } from "../../../model/Schema";
+import connectMongo from "../../../database/conn"
 
 export default async function handler(req, res) {
     connectMongo().catch(error => res.json({ error: "Connection failed" }))
@@ -8,7 +7,7 @@ export default async function handler(req, res) {
 
         const checkExisting = await Order.find()
         if (checkExisting) {
-            res.status(201).json({ status: true, data: checkExisting })
+            res.status(201).json({ msg:"ok" })
         }
         else {
             res.status(201).json({ status: true, data: "" })

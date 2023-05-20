@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
       const restaurant = await Restaurant.create({ name, admin ,description, address, photo, numOfTable,  cuisine, reviews: [] });
 
-      res.status(201).json({ status: true, restaurant });
+      res.status(201).json({ msg:"restaurant ok" });
     } else {
       res.status(405).json({ error: "Method Not Allowed" });
     }

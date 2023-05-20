@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       }      
       const order = await Order.create({ userId, restaurantId, items, totalPrice , status });
 
-      res.status(201).json({ status: true, order });
+      res.status(201).json({ msg: "ok" });
     } else {
       res.status(405).json({ error: "Method Not Allowed" });
     }

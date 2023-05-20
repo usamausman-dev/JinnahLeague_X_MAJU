@@ -1,5 +1,5 @@
-import connectMongo from "../../../database/conn";
-import { Restaurant } from "../../../model/Schema";
+import connectMongo from "../../../database/conn"
+import { Restaurant } from "../../../model/Schema"
 
 export default async function handler(req, res) {
     connectMongo().catch(error => res.json({ error: "Connection failed" }))
