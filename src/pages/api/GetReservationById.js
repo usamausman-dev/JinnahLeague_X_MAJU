@@ -1,5 +1,5 @@
 import connectMongo from "../../../database/conn";
-import { Restaurant } from "../../../model/Schema";
+import { Reservation } from "../../../model/Schema";
 
 export default async function handler(req, res) {
     connectMongo().catch(error => res.json({ error: "Connection failed" }))
@@ -8,7 +8,7 @@ export default async function handler(req, res) {
         if (!req.body) return res.status(404).json({ error: 'Dont Have form Data' })
         const { id } = req.body
 
-        const checkExisting = await Restaurant.find({ _id: id })
+        const checkExisting = await Reservation.find({ _id: id })
         if (checkExisting) {
             res.status(201).json({ status: true, data: checkExisting })
         }

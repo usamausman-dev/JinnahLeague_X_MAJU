@@ -6,9 +6,9 @@ export default async function handler(req, res) {
 
     if (req.method === 'POST') {
         if (!req.body) return res.status(404).json({ error: 'Dont Have form Data' })
-        const { id } = req.body
+        const { admin } = req.body
 
-        const checkExisting = await Restaurant.find({ _id: id })
+        const checkExisting = await Restaurant.find({ admin })
         if (checkExisting) {
             res.status(201).json({ status: true, data: checkExisting })
         }

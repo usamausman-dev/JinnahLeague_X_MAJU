@@ -1,14 +1,12 @@
 import connectMongo from "../../../database/conn";
-import { Restaurant } from "../../../model/Schema";
+import { Order } from "../../../model/Schema";
 
 export default async function handler(req, res) {
     connectMongo().catch(error => res.json({ error: "Connection failed" }))
 
-    if (req.method === 'POST') {
-        if (!req.body) return res.status(404).json({ error: 'Dont Have form Data' })
-        const { id } = req.body
+    if (req.method === 'GET') {
 
-        const checkExisting = await Restaurant.find({ _id: id })
+        const checkExisting = await Order.find()
         if (checkExisting) {
             res.status(201).json({ status: true, data: checkExisting })
         }
@@ -22,5 +20,3 @@ export default async function handler(req, res) {
         res.status(500).json({ message: "HTTP Method not valid only POST Accepted" })
     }
 }
-
-

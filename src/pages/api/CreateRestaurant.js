@@ -2,26 +2,23 @@ import connectMongo from "../../../database/conn";
 import { Restaurant } from "../../../model/Schema";
 
 export default async function handler(req, res) {
-    connectMongo().catch(error => res.json({ error: "Connection failed" }))
+  try {
+    await connectMongo();
 
-    console.log(req.body)
-    if (req.method === 'POST') {
-        if (!req.body) return res.status(404).json({ error: 'Dont Have form Data' })
-        const {name, description, address, cuisine } = req.body;
-        console.log(name, description, address, cuisine )
+    if (req.method === "POST") {
+      const { name, description, address, cuisine, photo, admin, numOfTable } = req.body;
 
+      if (!name || !description || !address || !cuisine || !photo || !admin || !numOfTable) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
 
-        Restaurant.create({name, description, address, cuisine})
-            .then((data) => {
-                res.status(201).json({ status: true, Restaurant: data })
-            })
-            .catch((err) => {
-                res.status(404).json({ err })
-            })
+      const restaurant = await Restaurant.create({ name, admin ,description, address, photo, numOfTable,  cuisine, reviews: [] });
+
+      res.status(201).json({ status: true, restaurant });
+    } else {
+      res.status(405).json({ error: "Method Not Allowed" });
     }
-
-    else {
-        res.status(500).json({ message: "HTTP Method not valid only POST Accepted" })
-    }
-
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }
