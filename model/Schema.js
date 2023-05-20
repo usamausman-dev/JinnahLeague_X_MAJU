@@ -14,6 +14,11 @@ const restaurantSchema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
+  },
+  admin: {
+    type: String,
+    required: true,
   },
   description: {
     type: String,
