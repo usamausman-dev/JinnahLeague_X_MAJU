@@ -1,9 +1,7 @@
-import { Schema, model, models } from 'mongoose'
+import mongoose, { Schema, model, models } from 'mongoose'
 
 const userSchema = new Schema({
-    firstname: String,
-    lastname: String,
-    organization: String,
+    username: String,
     email: String,
     password: String
 })
@@ -11,22 +9,29 @@ const userSchema = new Schema({
 const Users = models.user || model('user', userSchema);
 export default Users
 
-const projectSchema = new Schema({
-    projectAdmin: String,
-    projectName: String,
-    members: Array
-})
-
-export const Project = models.project || model('project', projectSchema)
-
-const TaskSchema = new Schema({
-    projectID: String,
-    name: String,
-    nature: String,
-    startdate: Date,
-    enddate: Date,
-    projectStatus: String,
-    person: String
+const restaurantSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    cuisine: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-export const Task = models.task || model('task', TaskSchema)
+export const Restaurant = models.restaurant || model('restaurant', restaurantSchema);
+
+

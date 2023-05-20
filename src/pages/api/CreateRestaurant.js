@@ -1,30 +1,27 @@
-import { hash } from "bcryptjs";
-import connectMongo from "../../../../database/conn"
-import Users from "../../../../model/Schema";
+import connectMongo from "../../../database/conn";
+import { Restaurant } from "../../../model/Schema";
 
 export default async function handler(req, res) {
     connectMongo().catch(error => res.json({ error: "Connection failed" }))
 
     console.log(req.body)
-
     if (req.method === 'POST') {
         if (!req.body) return res.status(404).json({ error: 'Dont Have form Data' })
-        const { username, email, password } = req.body;
+        const {name, description, address, cuisine } = req.body;
+        console.log(name, description, address, cuisine )
 
 
-        const checkExisting = await Users.findOne({ email })
-        if (checkExisting) return res.status(422).json({ message: 'User Already Exists' })
-
-        Users.create({username, email, password: await hash(password, 12) })
+        Restaurant.create({name, description, address, cuisine})
             .then((data) => {
-                res.status(201).json({ status: true, user: data })
+                res.status(201).json({ status: true, Restaurant: data })
             })
             .catch((err) => {
                 res.status(404).json({ err })
             })
-
     }
+
     else {
         res.status(500).json({ message: "HTTP Method not valid only POST Accepted" })
     }
+
 }
