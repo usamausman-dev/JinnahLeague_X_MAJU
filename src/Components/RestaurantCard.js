@@ -3,7 +3,7 @@ import React from 'react'
 function RestaurantCard({ restaurantData }) {
     console.log(restaurantData)
     return (
-        <div className='shadow-lg rounded-lg flex-col flex justify-between border-black-600/20 border-2' onClick={() => window.location = `/Restaurants/${restaurantData._id}`}>
+        <div className='cursor-pointer shadow-lg rounded-lg flex-col flex justify-between border-black-600/20 border-2' onClick={() => window.location = `/Restaurants/${restaurantData._id}`}>
             <div>
                 <img className='rounded' src={restaurantData.photo} alt="cardImg" srcSet="" />
             </div>

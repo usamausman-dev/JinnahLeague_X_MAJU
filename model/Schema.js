@@ -41,16 +41,16 @@ const restaurantSchema = new Schema({
     type: String,
     required: true,
   },
-  // reviews: [
-  //   {
-  //     user: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: 'Users',
-  //     },
-  //     rating: Number,
-  //     comment: String,
-  //   },
-  // ],
+  reviews: [
+    {
+      user: {
+        type: String,
+        ref: 'Users',
+      },
+      rating: Number,
+      comment: String,
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

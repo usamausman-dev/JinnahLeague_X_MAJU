@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useSession, signOut } from 'next-auth/react'
 import Restaurants from '@/Components/Restaurants'
 import Link from 'next/link'
+import AddRestaurant from '@/Components/AddRestaurant'
+import UserRestaurant from '@/Components/UserRestaurants'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,12 +26,16 @@ export default function Home() {
           <div className='flex justify-centers items-centers'>
             {
               status === 'authenticated' ?
-                (
+                (<>
+                  <UserRestaurant />
+                  <AddRestaurant />
                   <button className='bg-red-600 px-6 py-3 rounded ml-2' onClick={() => signOut({ callbackUrl: '/login' })}>Logout</button>
+                </>
                 )
                 :
                 (
                   <>
+
                     <Link className='bg-red-600 px-6 py-3 rounded-lg ml-2' href="/login">Login</Link>
                     <Link className='bg-slate-100 text-red-600 font-bold border-2 border-red-600 px-6 py-3 rounded-lg ml-2' href="/login">Sign Up</Link>
                   </>

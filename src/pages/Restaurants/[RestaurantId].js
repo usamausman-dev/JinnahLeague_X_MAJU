@@ -39,7 +39,7 @@ export default function RestaurantPage() {
             restaurantId: router.query.RestaurantId,
             comment: reviewText,
             rating: rating,
-            userId: session
+            userId: session.user.email
         }
 
         console.log(payload)
@@ -52,7 +52,7 @@ export default function RestaurantPage() {
         })
             .then(function (response) {
                 if (response.status === 201) {
-                    alert("Review Added Successful")
+                    router.reload()
                 }
             })
             .catch(function (error) {
@@ -76,7 +76,7 @@ export default function RestaurantPage() {
 
             <nav className='shadow-xl flex justify-between bg-white text-white px-10 py-5 sticky top-0'>
                 <div className='text-2xl text-black font-bold'>
-                    <span className='text-red-600'>Yep.</span> Restaurant
+                    <Link href='/'>  <span className='text-red-600'>Yep.</span> Restaurant</Link>
                 </div>
 
                 <div className='flex justify-centers items-centers'>
@@ -103,8 +103,10 @@ export default function RestaurantPage() {
 
                 {
                     restaurant.map((val, key) => <div key={key} className='grid grid-cols-2  bg-cover bg-no-repeat h-[88.5vh]'>
-                        <div className='bg-red-100  bg-fixed bg-cover bg-[url("https://media.istockphoto.com/id/1394055240/photo/happy-black-female-chef-preparing-food-in-frying-pan-at-restaurant-kitchen.jpg?b=1&s=170667a&w=0&k=20&c=8pARCDQkmc8X6SUnWQBY7MAdYVBSxbH8PBS3sJxLOiE=")]'>
+                        {/* <div className='bg-red-100  bg-fixed bg-cover bg-[url("https://media.istockphoto.com/id/1394055240/photo/happy-black-female-chef-preparing-food-in-frying-pan-at-restaurant-kitchen.jpg?b=1&s=170667a&w=0&k=20&c=8pARCDQkmc8X6SUnWQBY7MAdYVBSxbH8PBS3sJxLOiE=")]'>
 
+                        </div> */}
+                        <div className='bg-red-100 bg-fixed bg-cover' style={{ backgroundImage: `url("${val.photo}")` }}>
                         </div>
                         <div className='p-16'>
                             <h1 className='text-4xl font-bold'>{val.name} , Table -  ({val.numOfTable})</h1>
@@ -144,7 +146,7 @@ export default function RestaurantPage() {
                             <div className='grid grid-cols-2 gap-10 mt-10'>
 
                                 {
-                                    val.reviews.map((v, k) => <Reviewcard review={v} key={k} />)
+                                    val.reviews?.map((v, k) => <Reviewcard review={v} key={k} />)
                                 }
                             </div>
 
