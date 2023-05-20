@@ -44,7 +44,7 @@ const restaurantSchema = new Schema({
     {
       user: {
         type: String,
-        ref: 'Users',
+        // ref: 'Users',
       },
       rating: Number,
       comment: String,
